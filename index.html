@@ -103,6 +103,92 @@
 
     .hero::after { display: none; }
 
+    /* ── LAMP EFFECT ── */
+    .hero-lamp {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 420px;
+      pointer-events: none;
+      z-index: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .lamp-left, .lamp-right {
+      position: absolute;
+      top: 0;
+      height: 224px;
+      overflow: visible;
+      animation: lampBeamExpand 0.8s 0.3s cubic-bezier(0.4,0,0.2,1) both;
+    }
+    .lamp-left {
+      right: 50%;
+      width: 30rem;
+      background-image: conic-gradient(from 70deg at center top, rgba(212,175,55,0.55), transparent, transparent);
+      mask-image: linear-gradient(to right, white, transparent);
+    }
+    .lamp-right {
+      left: 50%;
+      width: 30rem;
+      background-image: conic-gradient(from 290deg at center top, transparent, transparent, rgba(212,175,55,0.55));
+      mask-image: linear-gradient(to left, white, transparent);
+    }
+
+    .lamp-line {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 2px;
+      background: rgba(212,175,55,0.8);
+      border-radius: 9999px;
+      animation: lampLineExpand 0.8s 0.3s cubic-bezier(0.4,0,0.2,1) both;
+      box-shadow: 0 0 18px 4px rgba(212,175,55,0.45);
+    }
+
+    .lamp-glow-blob {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 28rem;
+      height: 9rem;
+      background: rgba(212,175,55,0.18);
+      border-radius: 50%;
+      filter: blur(40px);
+      animation: lampGlowFade 0.8s 0.3s ease-in-out both;
+    }
+
+    .lamp-glow-tight {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10rem;
+      height: 6rem;
+      background: rgba(212,175,55,0.28);
+      border-radius: 50%;
+      filter: blur(22px);
+      animation: lampGlowFade 0.8s 0.2s ease-in-out both;
+    }
+
+    @keyframes lampBeamExpand {
+      from { width: 8rem; opacity: 0.3; }
+      to   { width: 30rem; opacity: 1; }
+    }
+    @keyframes lampLineExpand {
+      from { width: 6rem; opacity: 0; }
+      to   { width: 28rem; opacity: 1; }
+    }
+    @keyframes lampGlowFade {
+      from { opacity: 0; transform: translateX(-50%) scaleX(0.4); }
+      to   { opacity: 1; transform: translateX(-50%) scaleX(1); }
+    }
+
     .hero-inner {
       position: relative;
       z-index: 1;
@@ -125,7 +211,7 @@
     .hero-wordmark-name {
       font-family: 'Montserrat', sans-serif;
       font-weight: 900;
-      font-size: clamp(5rem, 16vw, 14rem);
+      font-size: clamp(3.75rem, 12vw, 10.5rem);
       letter-spacing: -0.02em;
       line-height: 0.95;
     }
@@ -136,7 +222,7 @@
     .hero-wordmark-tagline {
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: clamp(1.6rem, 5vw, 4.4rem);
+      font-size: clamp(1.2rem, 3.75vw, 3.3rem);
       color: var(--navy);
       letter-spacing: 0.01em;
       margin-top: 0.15em;
@@ -170,7 +256,7 @@
 
     .hero h1 {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-size: clamp(1.2rem, 2.75vw, 2rem);
       font-weight: 800;
       color: var(--navy);
       line-height: 1.1;
@@ -571,7 +657,7 @@
       nav { padding: 0 1.25rem; }
       .hero { padding: 100px 1.5rem 4rem; }
       .hero-logo { height: 70px; }
-      .hero h1 { font-size: 2rem; }
+      .hero h1 { font-size: 1rem; }
       .preview, .register { padding: 4rem 1.5rem; }
       .mockup-frame:first-child { width: 130px; }
       .mockup-frame:last-child  { width: 130px; }
@@ -600,6 +686,15 @@
 
   <!-- ── HERO ── -->
   <section class="hero">
+    <!-- lamp effect -->
+    <div class="hero-lamp" aria-hidden="true">
+      <div class="lamp-left"></div>
+      <div class="lamp-right"></div>
+      <div class="lamp-glow-blob"></div>
+      <div class="lamp-glow-tight"></div>
+      <div class="lamp-line"></div>
+    </div>
+
     <div class="hero-inner">
       <div class="hero-wordmark" role="img" aria-label="VosMas — Learn Different">
         <div class="hero-wordmark-name">
@@ -611,8 +706,8 @@
       <div class="hero-badge">Beta Waitlist Now Open</div>
 
       <h1>
-        The future of work is <em>AI-powered.</em><br />
-        Your learning should be too.
+        The future of work is <em>AI-powered</em><br /><br />
+        Your learning should be too
       </h1>
 
       <p class="hero-sub">
